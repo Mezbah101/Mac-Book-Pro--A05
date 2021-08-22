@@ -1,19 +1,14 @@
 
  
-function updatePrice(product,buttonNumber) {
-    var currentTotalCost = 0;
-       
-       var previousCost =parseInt( document.getElementById(product+"-extra-cost").innerText);
-    
-   
+function updatePrice(buttonNumber) {
        //Memory
 
        if (buttonNumber == "memoryBtnOne") {
-           var currentCost = previousCost * 0;
+           var currentCost = 0;
        document.getElementById("memory-extra-cost").innerText = currentCost; 
        }
        if (buttonNumber == "memoryBtnTwo") {
-           var currentCost = previousCost + 180;
+           var currentCost = 180;
        document.getElementById("memory-extra-cost").innerText = currentCost; 
      
        }
@@ -22,17 +17,17 @@ function updatePrice(product,buttonNumber) {
        //Storage
 
        if (buttonNumber == "storageBtnOne") {
-           var currentCost = previousCost *0;
+           var currentCost = 0;
        document.getElementById("storage-extra-cost").innerText = currentCost; 
       
        }
         if (buttonNumber == "storageBtnTwo") {
-           var currentCost = previousCost +100;
+           var currentCost = 100;
        document.getElementById("storage-extra-cost").innerText = currentCost; 
       
        }
         if (buttonNumber == "storageBtnThree") {
-           var currentCost = previousCost + 180;
+           var currentCost = 180;
        document.getElementById("storage-extra-cost").innerText = currentCost; 
       
        }
@@ -41,53 +36,49 @@ function updatePrice(product,buttonNumber) {
 
 
        if (buttonNumber == "deliveryBtnOne") {
-           var currentCost = previousCost *0;
+           var currentCost = 0;
        document.getElementById("delivery-extra-cost").innerText = currentCost; 
       
        }
         if (buttonNumber == "deliveryBtnTwo") {
-           var currentCost = previousCost +20;
+           var currentCost = 20;
        document.getElementById("delivery-extra-cost").innerText = currentCost; 
       
        }
-
-       // Total Calculation 
-
-      
-
-           var totalCost = currentTotalCost + 1299;
-           document.getElementById("total-cost").innerText = totalCost;
-
-         // Ultimate Total Calculation 
-           
-         var finalTotalCost = currentCost + 1299;
-         document.getElementById ("ultimate-total").innerText = finalTotalCost;
-         
-           if (document.getElementById("promo-code").value == "stevekaku") {
-
-
-               
-           }
-              
-          
-
-
-    
+        updateTotalPrie()
    
    }
 
+ //Update Total Price 
 
 
 
+   function updateTotalPrie() {
+
+    var memoryCost = parseInt(document.getElementById("memory-extra-cost").innerText);
+    console.log(memoryCost);
+
+    var storageCost =parseInt( document.getElementById("storage-extra-cost").innerText);
+    console.log(storageCost);
 
 
+    var deliveryCost = parseInt(document.getElementById("delivery-extra-cost").innerText);
+    console.log(deliveryCost);
 
-   function updateStoragePrice() {
+
+    var totalCost = 1299 + memoryCost + storageCost + deliveryCost;
+
+    document.getElementById("total-cost").innerText = totalCost;
+
+     //Ultimate Total Section 
+
+     var ultimateTotal= 1299 + memoryCost + storageCost + deliveryCost;
+     document.getElementById ("ultimate-total").innerText = ultimateTotal;
+
+
        
    }
 
-
-   // Update Total
    
 
    
@@ -98,12 +89,12 @@ function updatePrice(product,buttonNumber) {
    
    document.getElementById("memory-button-one").addEventListener("click", function () {
        
-    updatePrice("memory","memoryBtnOne")
+    updatePrice("memoryBtnOne")
    })
 
  document.getElementById("memory-button-two").addEventListener("click", function () {
        
-       updatePrice ("memory","memoryBtnTwo")
+       updatePrice ("memoryBtnTwo")
    
    })
    
@@ -113,20 +104,20 @@ function updatePrice(product,buttonNumber) {
    
    document.getElementById("storage-button-one").addEventListener("click", function () {
    
-       updatePrice("storage","storageBtnOne");
+       updatePrice("storageBtnOne");
    
        
    })
 
    document.getElementById("storage-button-two").addEventListener("click", function () {
    
-       updatePrice("storage","storageBtnTwo");
+       updatePrice("storageBtnTwo");
        
    })
 
    document.getElementById("storage-button-three").addEventListener("click", function () {
    
-       updatePrice("storage","storageBtnThree")
+       updatePrice("storageBtnThree")
         
    })
    
@@ -135,33 +126,37 @@ function updatePrice(product,buttonNumber) {
    
    document.getElementById("delivery-button-one").addEventListener("click", function () {
    
-       updatePrice ("delivery","deliveryBtnOne")
+       updatePrice ("deliveryBtnOne")
        
    })
 
      
    document.getElementById("delivery-button-two").addEventListener("click", function () {
    
-       updatePrice ("delivery","deliveryBtnTwo")
+       updatePrice ("deliveryBtnTwo")
        
    })
 
    
-   //Promo Code Section 
+   //Promo Code Section --- Bonus Part 
 
 
    document.getElementById("apply-btn").addEventListener("click", function () {
 if (document.getElementById("promo-code").value == "stevekaku") {
 
+var previousAmount = parseInt(document.getElementById("ultimate-total").innerText);
+console.log(previousAmount);
 
+var discountAmount = (previousAmount*20)/100;
+console.log(discountAmount);
+ 
+var ultimateTotalAmount = previousAmount - discountAmount;
+console.log(ultimateTotalAmount);
+document.getElementById("ultimate-total").innerText = ultimateTotalAmount
 
+document.getElementById("promo-code").value = ""
+  
 
-    var discountAmount =  parseInt(document.getElementById("ultimate-total").innerText)/20;
-    var Total = document.getElementById("ultimate-total").innerText - discountAmount;
-    var ultimateTotal = Total - currentCost;
-
-    document.getElementById("ultimate-total").innerText = ultimateTotal;
-    document.getElementById("promo-code").value = "";
 }
    })
    
